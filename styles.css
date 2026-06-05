@@ -1,0 +1,262 @@
+/* ============================================================
+   3 Friends and a Guy Named Travis
+   Movies, sorted by feeling.
+   ============================================================ */
+
+:root {
+  --bg: #0c0a14;
+  --bg-soft: #15121f;
+  --card: #1b1726;
+  --text: #f3f0ff;
+  --muted: #a39db8;
+  --line: #2a2438;
+  --brand: #f7b32b;
+  --travis: #ff5d5d;
+  --max: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 5vw, 3rem);
+  background: rgba(12, 10, 20, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+.brand-3 { color: var(--brand); }
+.brand-amp { color: var(--muted); }
+.brand-travis { color: var(--travis); }
+.nav-links { display: flex; gap: 1.5rem; font-size: 0.95rem; }
+.nav-links a { color: var(--muted); transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: clamp(4rem, 12vw, 9rem) clamp(1rem, 5vw, 3rem) clamp(3rem, 8vw, 6rem);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.hero-glow {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 700px;
+  max-width: 110vw;
+  background: radial-gradient(circle, rgba(155, 93, 229, 0.25), transparent 60%);
+  filter: blur(40px);
+  z-index: -1;
+  pointer-events: none;
+}
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  color: var(--brand);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -1px;
+}
+.hero h1 em { color: var(--brand); font-style: italic; }
+.strike {
+  position: relative;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--travis);
+  text-decoration-thickness: 4px;
+}
+.lede {
+  max-width: 38rem;
+  margin: 1.75rem auto 0;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  color: var(--muted);
+}
+.lede strong { color: var(--text); }
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.25rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary {
+  background: var(--brand);
+  color: #1a1408;
+  box-shadow: 0 10px 30px -10px rgba(247, 179, 43, 0.6);
+}
+.btn-ghost { border: 1px solid var(--line); color: var(--text); }
+.btn-ghost:hover { background: var(--bg-soft); }
+.tiny-note { margin-top: 2rem; font-size: 0.85rem; color: var(--muted); }
+
+/* ---------- Sections ---------- */
+.section {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 3rem);
+}
+.section-head { text-align: center; margin-bottom: 3rem; }
+.section-head h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+.section-head p { color: var(--muted); margin-top: 0.75rem; }
+
+/* ---------- Feelings grid ---------- */
+.feelings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.feeling {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.75rem;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.feeling::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--accent);
+  opacity: 0.9;
+}
+.feeling::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: var(--accent);
+  opacity: 0.12;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+.feeling:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+.feeling-emoji { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+.feeling h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.feeling p { color: var(--muted); font-size: 0.95rem; }
+
+/* ---------- Why ---------- */
+.section-why { max-width: 780px; }
+.why-card {
+  background: linear-gradient(160deg, var(--bg-soft), var(--card));
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+}
+.why-card h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+.why-card p { color: var(--muted); margin-bottom: 1rem; font-size: 1.05rem; }
+.why-card strong { color: var(--text); }
+.why-card em { color: var(--brand); font-style: italic; }
+.why-punch { color: var(--text) !important; font-weight: 500; }
+
+/* ---------- Podcast ---------- */
+.podcast-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.pod-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 0.85rem 1.4rem;
+  border-radius: 14px;
+  font-weight: 500;
+  transition: transform 0.15s, border-color 0.2s;
+}
+.pod-btn:hover { transform: translateY(-2px); border-color: var(--brand); }
+.pod-btn span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--brand);
+  border: 1px solid var(--brand);
+  border-radius: 6px;
+  padding: 0.1rem 0.4rem;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 3rem 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+.footer-tag { font-size: 0.9rem; margin-top: 0.4rem; }
+.footer-fine { font-size: 0.8rem; margin-top: 0.75rem; opacity: 0.7; font-style: italic; }
